@@ -138,6 +138,20 @@ async function generate(key, model, p) {
   });
 }
 
+// When Google says a model is busy (503/500), try other Flash models before giving up.
+const BACKUPS = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash', 'gemini-flash-lite-latest'];
+async function generateWithBackup(key, model, p) {
+  let r = await generate(key, model, p);
+  if (r.status < 500) return r;
+  for (const m of BACKUPS.filter(x => x !== model)) {
+    const r2 = await generate(key, m, p);
+    if (r2.status === 404) continue;
+    if (r2.status < 500) return r2;
+    r = r2;
+  }
+  return r;
+}
+
 module.exports = async (req, res) => {
   const key = (process.env.GEMINI_API_KEY || '').trim();
 
@@ -149,7 +163,7 @@ module.exports = async (req, res) => {
       const m = await pickModel(key);
       if (m.error) { out.problem = m.error; res.status(200).json(out); return; }
       out.model = m.model;
-      const r = await generate(key, m.model, { system: 'Reply in JSON.', contents: [{ role: 'user', parts: [{ text: 'Say OK.' }] }], schema: { type: 'OBJECT', properties: { reply: S }, required: ['reply'] } });
+      const r = await generateWithBackup(key, m.model, { system: 'Reply in JSON.', contents: [{ role: 'user', parts: [{ text: 'Say OK.' }] }], schema: { type: 'OBJECT', properties: { reply: S }, required: ['reply'] } });
       out.test = r.ok ? 'OK, AI is working' : await googleError(r);
     } catch (e) { out.problem = 'Network error reaching Google: ' + String(e && e.message || e).slice(0, 200); }
     res.status(200).json(out);
@@ -167,9 +181,9 @@ module.exports = async (req, res) => {
   try {
     let m = await pickModel(key);
     if (m.error) { console.error('Engdoc model check failed:', m.error); res.status(502).json({ error: 'model', detail: m.error }); return; }
-    let r = await generate(key, m.model, p);
-    if (r.status === 404) { cachedModel = null; m = await pickModel(key); if (m.model) r = await generate(key, m.model, p); }
-    if (r.status === 429) { res.status(429).json({ error: 'rate_limited' }); return; }
+    let r = await generateWithBackup(key, m.model, p);
+    if (r.status === 404) { cachedModel = null; m = await pickModel(key); if (m.model) r = await generateWithBackup(key, m.model, p); }
+    if (r.status === 429 || r.status === 503) { res.status(429).json({ error: 'rate_limited' }); return; }
     if (!r.ok) { const d = await googleError(r); console.error('Engdoc Gemini error:', d); res.status(502).json({ error: 'upstream', detail: d }); return; }
     const j = await r.json();
     const text = ((j.candidates && j.candidates[0] && j.candidates[0].content && j.candidates[0].content.parts) || []).filter(x => !x.thought).map(x => x.text || '').join('');
