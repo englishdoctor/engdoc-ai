@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Engdoc.ai · Spoken English with AI</title>
+<meta name="description" content="Engdoc.ai by English Doctor: free spoken English practice with AI, from Foundation to IELTS Speaking. কথা বলেই শিখি।">
+<meta name="theme-color" content="#0B2447">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Engdoc.ai">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;800&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B2447;--gold:#F2A93B;--bg:#F4F6FB;--card:#fff;--ink:#0B2447;--soft:#5A6A85;--line:#DDE3EE;--goldsoft:#FFF3DF;--ok:#1B7F4B;--bad:#B3261E}
+@media (prefers-color-scheme:dark){:root{--bg:#06152B;--card:#0F2A52;--ink:#EEF2FA;--soft:#A9B6CE;--line:#1E3A66;--goldsoft:#3A2E14;--ok:#5FD39A;--bad:#FF8A80}}
+*{box-sizing:border-box;min-width:0}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Hind Siliguri",system-ui,sans-serif;padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+h1,h2,h3{font-family:"Baloo Da 2","Hind Siliguri",sans-serif;line-height:1.15;margin:0 0 6px}
+h1{font-size:clamp(26px,5vw,34px)}h2{font-size:22px}h3{font-size:18px}
+p{margin:6px 0}
+a{color:inherit}
+button,input,textarea,select{font:inherit;font-size:16px;color:inherit}
+button{cursor:pointer;min-height:44px;border-radius:12px;border:0;padding:0 16px;font-weight:600;background:var(--card);border:1.5px solid var(--line)}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.btn{background:var(--gold);color:#0B2447;border-color:var(--gold)}
+.btn-navy{background:var(--navy);color:#fff;border-color:var(--navy)}
+.top{position:sticky;top:0;z-index:5;background:var(--navy);color:#fff;display:flex;align-items:center;gap:12px;padding:calc(8px + env(safe-area-inset-top)) max(4vw,14px) 8px}
+.brand{margin-right:auto;text-decoration:none;display:flex;flex-direction:column;line-height:1.1}
+.brand b{font-family:"Baloo Da 2";font-size:24px}.brand b i{font-style:normal;color:var(--gold)}
+.brand span{font-size:12px;color:#F8D9A3}
+.top .inst{background:transparent;color:var(--gold);border-color:var(--gold);min-height:36px;font-size:14px;padding:0 10px}
+.logo{width:44px;height:44px;flex:none}
+main{max-width:860px;margin:0 auto;padding:16px max(4vw,14px)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0}
+.hero{background:var(--navy);color:#fff;border-radius:20px;padding:20px;margin:8px 0 12px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-50px;bottom:-50px;width:170px;height:170px;border-radius:50%;border:20px solid rgba(242,169,59,.22)}
+.hero .bn{color:#F8D9A3}.hero h2{color:var(--gold)}
+.bn{color:var(--soft);font-size:15px}
+.muted{color:var(--soft);font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;text-decoration:none;display:flex;flex-direction:column;gap:4px;border-top:6px solid var(--c,var(--gold))}
+.tile b{font-family:"Baloo Da 2";font-size:19px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center}
+.stat b{display:block;font-family:"Baloo Da 2";font-size:28px;line-height:1}
+.bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}.bar i{display:block;height:100%;background:var(--gold)}
+.unit{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;text-decoration:none;border:1px solid var(--line);background:var(--card);margin:8px 0}
+.unit .n{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;flex:none}
+.unit .t{flex:1}.unit .t small{display:block;color:var(--soft)}
+.ph{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.ph:last-child{border-bottom:0}.ph .tx{flex:1}.ph .tx b{display:block}
+.ic{min-width:44px;width:44px;padding:0;display:grid;place-items:center;font-size:18px}
+.score{font-size:14px;margin-top:4px}.score .hit{color:var(--ok);font-weight:600}.score .miss{color:var(--bad);text-decoration:underline}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin:8px 0}
+.chip{flex:none;border-radius:999px;min-height:40px;font-weight:500}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.chat{display:flex;flex-direction:column;gap:10px;margin:10px 0;min-height:200px}
+.m{max-width:88%;padding:10px 14px;border-radius:16px;white-space:pre-wrap}
+.m.ai{background:var(--navy);color:#fff;border-bottom-left-radius:4px;align-self:flex-start}
+.m.me{background:var(--goldsoft);align-self:flex-end;border-bottom-right-radius:4px}
+.m .say{background:none;border:0;min-height:30px;padding:0 6px;color:var(--gold)}
+.fix{align-self:flex-end;max-width:88%;border:1.5px dashed var(--gold);border-radius:14px;padding:10px 14px;font-size:15px}
+.fix s{color:var(--bad)}.fix .good{color:var(--ok);font-weight:600}
+.tip{align-self:flex-start;max-width:88%;border:1.5px solid var(--gold);border-radius:14px;padding:8px 14px;font-size:15px}
+.compose{position:sticky;bottom:calc(70px + env(safe-area-inset-bottom));background:var(--bg);padding:8px 0;display:flex;gap:8px;align-items:center}
+.compose input,.compose textarea{flex:1;min-height:48px;border:1.5px solid var(--line);border-radius:14px;padding:10px 14px;background:var(--card)}
+textarea{width:100%;border:1.5px solid var(--line);border-radius:14px;padding:10px 14px;background:var(--card);resize:vertical}
+input[type=text],input[type=search]{width:100%;min-height:44px;border:1.5px solid var(--line);border-radius:12px;padding:0 12px;background:var(--card)}
+.mic{width:54px;min-width:54px;height:54px;border-radius:50%;background:var(--navy);color:#fff;border:0;padding:0;font-size:22px;display:grid;place-items:center}
+.mic.live{background:var(--bad);animation:pulse 1.2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 9px rgba(179,38,30,.25)}}
+.timer{font-family:"Baloo Da 2";font-size:48px;text-align:center;line-height:1}
+.cue{border:2px solid var(--gold);border-radius:16px;padding:16px;background:var(--card)}
+.cue ul{margin:8px 0 0 0;padding-left:20px}
+.bands{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.band{border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--card)}
+.band b{font-family:"Baloo Da 2";font-size:30px;color:var(--gold);display:block;line-height:1}
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:6;background:var(--navy);display:flex;padding-bottom:env(safe-area-inset-bottom)}
+.nav a{flex:1;text-align:center;color:#fff;text-decoration:none;padding:8px 2px 10px;font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:2px}
+.nav a svg{width:22px;height:22px}
+.nav a.on{color:var(--gold)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom));background:#0B2447;color:#fff;padding:10px 16px;border-radius:12px;z-index:9;max-width:92vw;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.modal{position:fixed;inset:0;background:rgba(6,21,43,.6);display:grid;place-items:center;padding:16px;z-index:10}
+.modal .card{max-width:440px;width:100%}
+.foot{text-align:center;color:var(--soft);font-size:13px;padding:10px 0 18px}
+.spin{display:inline-block;width:18px;height:18px;border:3px solid var(--line);border-top-color:var(--gold);border-radius:50%;animation:sp 1s linear infinite;vertical-align:middle}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.mic.live,.spin{animation:none}}
+@media (min-width:900px){.nav{left:50%;transform:translateX(-50%);max-width:620px;border-radius:16px 16px 0 0}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#home"><b>Engdoc<i>.ai</i></b><span>by English Doctor · কথা বলেই শিখি</span></a>
+  <button class="inst" id="installBtn" hidden>⬇ Install</button>
+  <svg class="logo" viewBox="0 0 48 48" role="img" aria-label="English Doctor"><circle cx="24" cy="24" r="23" fill="#0B2447" stroke="#F2A93B" stroke-width="2.5"/><circle cx="24" cy="24" r="18" fill="none" stroke="#F2A93B" stroke-width=".8"/><text x="24" y="30" text-anchor="middle" font-family="Baloo Da 2,Arial" font-weight="800" font-size="17" fill="#F2A93B">ED</text></svg>
+</header>
+<main id="app" aria-live="polite"></main>
+<p class="foot">© English Doctor</p>
+<nav class="nav" aria-label="Main">
+  <a href="#home" data-n="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</a>
+  <a href="#learn" data-n="learn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h7a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4zM20 5h-7a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h7z"/></svg>Learn</a>
+  <a href="#ielts" data-n="ielts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l9 5-9 5-9-5zM7 11v5c3 2 7 2 10 0v-5"/></svg>IELTS</a>
+  <a href="#say" data-n="say"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8"/></svg>Say it</a>
+  <a href="#me" data-n="me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Me</a>
+</nav>
+<script src="content.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
